@@ -11,26 +11,23 @@ const isp = document.querySelector('#isp');
 const results = document.querySelector('.result')
 
 
-/* Get User IP */
+// Get User IP
 const getUserIp = async () => {
     const response = await fetch("https://cors-anywhere.herokuapp.com/https://api.ipify.org/?format=json");
     const data = await response.json();
     return data;
 }
 
-
+// Show Spinner
 const loading = () => {
 
     let info = document.querySelectorAll('.result__info-block') 
     Array.from(info).map(info => info.classList.toggle('hide'))
     results.classList.toggle('loading')
-    
 }
 
 
-//loading()
-
-/* Get User IP Location */
+// Get User IP Location
  const getLocation = async (ipAddress) => {
      let response;
     
@@ -50,13 +47,11 @@ const loading = () => {
  } 
 
 
-/* */
-
 function fillInfo(data) {
-
+    console.log(data)
     ipAddress.textContent = `${data['ip']}`;
     ipLocation.textContent = `${data['ip']}`;
-    ipTimezone.textContent = `<span>UTC</span>${data['timezone']}`;
+    ipTimezone.innerText = `<span>UTC</span>${data['timezone']}`;
     isp.textContent = `${data['isp']}`;
 }
 
@@ -64,8 +59,8 @@ function updateMap(data) {
     let lat = data['location']['lat'];
     let lng = data['location']['lng'];
 
-    mymap.setView([lat, lng], 13);
-    L.marker([lat, lng]).addTo(mymap);
+    L.map('map').setView([lat, lng], 13);
+    L.marker([lat, lng], {icon: customIcon}).addTo(mymap);
 }
 
 function resetFields() {
@@ -79,7 +74,9 @@ function resetFields() {
 
 button.addEventListener('click', (e) => {
     e.preventDefault();
+    loading()
     getUserIp()
+    .then(data => getLocation(data))
     .then(data => {
         fillInfo(data);
         updateMap(data);
@@ -87,8 +84,19 @@ button.addEventListener('click', (e) => {
     
 })
 
+var customIcon = L.icon({
+    iconUrl: 'images/icon-location.svg',
+
+    iconSize:     [45, 55], // size of the icon
+    shadowSize:   [50, 64], // size of the shadow
+    iconAnchor:   [22, 94], // point of the icon which will correspond to marker's location
+    shadowAnchor: [4, 62],  // the same for the shadow
+    popupAnchor:  [-3, -76] // point from which the popup should open relative to the iconAnchor
+});
+
 var mymap = L.map('map').setView([51.505, -0.09], 13);
-var marker = L.marker([51.5, -0.09]).addTo(mymap);
+var marker = L.marker([51.5, -0.09], {icon: customIcon}).addTo(mymap);
+
 
 L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoiYWxlc3NhbmRic3MiLCJhIjoiY2tpcnNwaDk4MDZoZzJ5b2E3b3lkZHhvZiJ9.6refQpujKF50TMn-2WpFkA', {
     attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
@@ -98,6 +106,7 @@ L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_toke
     zoomOffset: -1,
     accessToken: 'pk.eyJ1IjoiYWxlc3NhbmRic3MiLCJhIjoiY2tpcnNwaDk4MDZoZzJ5b2E3b3lkZHhvZiJ9.6refQpujKF50TMn-2WpFkA'
 }).addTo(mymap);
+mymap.zoomControl.setPosition('bottomleft');
 
 
 
