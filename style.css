@@ -212,11 +212,10 @@ span {
   overflow: hidden; }
 
 .leaflet-control-container {
-  position: absolute;
-  bottom: 100px; }
+  display: none; }
   @media (min-width: 1024px) {
     .leaflet-control-container {
-      position: initial; } }
+      display: initial; } }
 
 #loading {
   display: inline-block;
@@ -317,5 +316,4 @@ span {
   to {
     -webkit-transform: initial;
             transform: initial; } }
-
 /*# sourceMappingURL=style.css.map */
