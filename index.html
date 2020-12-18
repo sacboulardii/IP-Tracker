@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
+    integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
+    crossorigin=""/>
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
+    integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
+    crossorigin=""></script>
+    <link rel="stylesheet" href="style.css">
+    <title>Document</title>
+</head>
+<body>
+    
+    <header class="header container">
+        <h1 class="heading">IP Address Tracker</h1>
+        <div class="search-bar">
+            <input type="text" aria-label="ipAddress" id="ip" class="search-bar__input" 
+            placeholder="Search for any IP address or domain">
+            <button id="button" type="submit" aria-label="Submit" class="search-bar__button"><img src="images/icon-arrow.svg"></button>
+        </div>
+
+        <div class="result container">
+            <div class="result__info-block">
+                <h2 class="info-block__title">IP Address</h2>
+                <p id="ip-address" class="info-block__result">192.212.174.101</p>
+            </div>
+            <div class="result__info-block">
+                <h2 class="info-block__title">Location</h2>
+                <p id="location" class="info-block__result">Brooklyn, NY 10001</p>
+            </div>
+            <div class="result__info-block">
+                <h2 class="info-block__title">Timezone</h2>
+                <p id="timezone" class="info-block__result"><span>UTC</span>-05:00</p>
+            </div>
+            <div class="result__info-block">
+                <h2 class="info-block__title">ISP</h2>
+                <p id="isp" class="info-block__result">SpaceX Starlink</p>
+            </div>
+            <div id="loading hide"></div>
+        </div>
+    </header>
+
+    
+    <div id='map'></div>   
+    <script src="main.js"></script>
+</body>
+</html>
