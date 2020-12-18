@@ -14,7 +14,7 @@ const spinner = document.querySelector('#loading')
 
 // Get User IP
 const getUserIp = async () => {
-    const response = await fetch("https://cors-anywhere.herokuapp.com/https://api.ipify.org/?format=json");
+    const response = await fetch("https://api.ipify.org/?format=json");
     const data = await response.json();
     return data;
 }
@@ -76,18 +76,18 @@ function resetFields() {
 
 button.addEventListener('click', (e) => {
     e.preventDefault();
-    loading()
+    loading();
     getUserIp()
     .then(data =>  {
     getLocation(data['ip'])  
     }).then(data => {
-        
+
         fillInfo(data);
+        results.classList.toggle('loading');
+        Array.from(info).map(info => info.classList.toggle('hide'))
         spinner.classList.add('hide');
         updateMap(data);
-    })
-    
-    
+    }) 
 });
 
 var customIcon = L.icon({
