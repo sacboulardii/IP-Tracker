@@ -1,0 +1,14 @@
+$mobile-width: 375px;
+$desktop-width: 1440px;
+
+$gray: hsl(0, 0%, 59%);
+$light-gray: lighten($gray, 30%);
+
+$very-dark-gray: hsl(0, 0%, 17%);
+$dark-gray: lighten($very-dark-gray, 10%);
+
+$font-size: 18px;
+$body-font: 'Rubik', 'sans-serif';
+$fw-400: 400;
+$fw-500: 500;
+$fw-700: 700;

@@ -3,50 +3,75 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="images/favicon-32x32.png" type="image/x-icon">
+    <!-- FONT -->
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;700&display=swap" rel="stylesheet">
+    <!-- LEAFLET API -->
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
     integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
     crossorigin=""/>
     <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
     integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
     crossorigin=""></script>
+    <!-- CSS -->
     <link rel="stylesheet" href="style.css">
-    <title>Document</title>
+    <!-- ANIMATE.CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+    
+    <style>
+        .attribution { text-align: center; }
+        .attribution a { color: hsl(228, 45%, 44%); }
+    </style>
+    <title>IP Address Tracker</title>
 </head>
 <body>
     
     <header class="header container">
-        <h1 class="heading">IP Address Tracker</h1>
-        <div class="search-bar">
-            <input type="text" aria-label="ipAddress" id="ip" class="search-bar__input" 
-            placeholder="Search for any IP address or domain">
-            <button id="button" type="submit" aria-label="Submit" class="search-bar__button"><img src="images/icon-arrow.svg"></button>
-        </div>
-
+        <form class ="ipAddress-form" action="">
+            <h1 class="heading">IP Address Tracker</h1>
+            <div class="search-bar">
+                <input type="text" aria-label="ipAddress" id="ip" class="search-bar__input" 
+                placeholder="Search for any IP address or domain">
+                <button id="button" type="submit" aria-label="Submit" class="search-bar__button"><img src="images/icon-arrow.svg"></button>
+            </div>
+            <p class="error-message hide">Invalid IP Address</p>
+        </form>
+        
+        
         <div class="result container">
-            <div class="result__info-block">
+            <div class="result__info-block animate__animated animate__fadeInDown">
                 <h2 class="info-block__title">IP Address</h2>
-                <p id="ip-address" class="info-block__result">192.212.174.101</p>
+                <p id="ip-address" class="info-block__result"></p>
             </div>
-            <div class="result__info-block">
+            <div class="result__info-block animate__animated animate__fadeInDown">
                 <h2 class="info-block__title">Location</h2>
-                <p id="location" class="info-block__result">Brooklyn, NY 10001</p>
+                <p id="location" class="info-block__result"></p>
             </div>
-            <div class="result__info-block">
+            <div class="result__info-block animate__animated animate__fadeInDown">
                 <h2 class="info-block__title">Timezone</h2>
-                <p id="timezone" class="info-block__result"><span>UTC</span>-05:00</p>
+                <p id="timezone" class="info-block__result"></p>
             </div>
-            <div class="result__info-block">
+            <div class="result__info-block animate__animated animate__fadeInDown">
                 <h2 class="info-block__title">ISP</h2>
-                <p id="isp" class="info-block__result">SpaceX Starlink</p>
+                <p id="isp" class="info-block__result"></p>
             </div>
-            <div id="loading hide"></div>
+            <div class="spinner hide">
+                <div id="loading"></div>
+            </div>
         </div>
     </header>
 
+    <main>
+        <div id='map'></div>
+    </main>
+     
+
+    <div class="attribution">
+        Challenge by <a href="https://www.frontendmentor.io?ref=challenge" target="_blank">Frontend Mentor</a>. 
+        Coded by <a href="#">Vitor Alessandro</a>.
+    </div>
     
-    <div id='map'></div>   
     <script src="main.js"></script>
 </body>
 </html>
