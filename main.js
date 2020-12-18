@@ -9,6 +9,7 @@ const ipTimezone = document.querySelector('#timezone');
 const isp = document.querySelector('#isp');
 
 const results = document.querySelector('.result')
+const spinner = document.querySelector('#loading')
 
 
 // Get User IP
@@ -70,19 +71,24 @@ function resetFields() {
     isp.textContent = '--';
 }
 
+
 //resetFields();
 
 button.addEventListener('click', (e) => {
     e.preventDefault();
     loading()
     getUserIp()
-    .then(data => getLocation(data))
-    .then(data => {
+    .then(data =>  {
+    getLocation(data['ip'])  
+    }).then(data => {
+        
         fillInfo(data);
+        spinner.classList.add('hide');
         updateMap(data);
     })
     
-})
+    
+});
 
 var customIcon = L.icon({
     iconUrl: 'images/icon-location.svg',
@@ -107,6 +113,3 @@ L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_toke
     accessToken: 'pk.eyJ1IjoiYWxlc3NhbmRic3MiLCJhIjoiY2tpcnNwaDk4MDZoZzJ5b2E3b3lkZHhvZiJ9.6refQpujKF50TMn-2WpFkA'
 }).addTo(mymap);
 mymap.zoomControl.setPosition('bottomleft');
-
-
-
